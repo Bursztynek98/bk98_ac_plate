@@ -1,17 +1,17 @@
-# Decryption
+# Description
 
-- This script is Server Side script!
+- This script is server-side script!
 - This script required OneSync to work correctly.
-- This script allow to sorte in serwer data of Plate text allocated to Vehicle!
+- This script allows storing in server data, Plate text allocated to Vehicle!
 - If Pattern is not valid, vehicle is deleted.
-- If plate text is not allowed by serwer for the player who creates the vehicle, vehicle is deleted.
-- Script create check loop (3 min) to test is all Server vehicle have set correct Plate if not, vehicle is deleted.
+- If plate text is not allowed by the server for the player who creates the vehicle, the vehicle is deleted.
+- Script create check loop (3 minutes) to test if all Server vehicles have set the correct Plate, if not, the vehicle is deleted.
 
 
 # Basic information
-When client start create vehicle. Server Just Trigger native event `entityCreated`
+When the client starts to create a vehicle, the server just triggers the native event `entityCreated`
 
-After that if Plate is different from default gta pattern Server Trigger event:
+After that, if Plate is different from the default GTA pattern, the Server Trigger event:
 ```lua
 TriggerEvent('IsPlateCanBySet',
 -- DATA
@@ -22,13 +22,13 @@ firstOwner = firstOwner -- Is Should by Player of Created Vehicle
 },
 -- CallBack
 function(isCanBySet)
-  -- If this function return false new entity is Delete from map
+  -- If this function return false new entity is Delete from map
 end
 )
 ```
-You handle this event with database script to test is player own this Plate String.
+You handle this event with a database script to test if the player owns this Plate String.
 
-TimeOut: `TestPlateTimeOut` (3 min) script test all vehicle on server is have correct plate if not vehicle is Delete
+Timeout: `TestPlateTimeOut` (3 min) script test: all vehicles on the server have the correct plate if not, the vehicle is deleted.
 
 # Exports
 
@@ -38,14 +38,14 @@ TimeOut: `TestPlateTimeOut` (3 min) script test all vehicle on server is have co
 
 # Example of open Trunk inventory
 
-1. When Client want Open "Trunk" we can accept data from the client only if provide `Plate` and `NetworkVehicleId`
-now convert NetId to entity by `NetworkGetEntityFromNetworkId` and 
-we can test is this Vehicle plate provided by client is correct and open Trunk inventory 
-2. When Client want Open "Trunk" we can accept data from the client only if provide `NetworkVehicleId`
-now convert NetId to entity by `NetworkGetEntityFromNetworkId` and we can get plate `getPlate` and open correct Trunk inventory
+1. When the client wants to open "Trunk," we can accept data from the client only if they provide `Plate` and `NetworkVehicleId`
+Now convert NetId to entity by `NetworkGetEntityFromNetworkId` and 
+We can test if this Vehicle plate provided by the client is correct and open Trunk inventory.
+2. When the client wants to open "Trunk," we can accept data from the client only if they provide `NetworkVehicleId`
+Now convert NetId to entity by `NetworkGetEntityFromNetworkId` and we can get plate `getPlate` and open the correct Trunk inventory
 
 ## Know issue
-- Off Course client with Executor can create local vehicle after few second set new Plate, but after 3 min serwer automatic delete this not valid vehicle, and if try open inventory server return started plate if contain native GTA pattern or nil if vehicle not registered
+- Off Course client with Executor can create a local vehicle after few second set new Plate, but after 3 min server automatic delete this not valid vehicle, and if try open inventory server return started plate if contain native GTA pattern or nil if vehicle not registered
 
 # Example of Create Vehicle
-- After Client Create own Vehicle is nice to by set `setPlate` by new `NetworkVehicleId`, Plate should by set for this new vehicle 
+- After the client creates their own vehicle, it is nice to be set `setPlate` by new `NetworkVehicleId`, Plate should be set for this new vehicle.
